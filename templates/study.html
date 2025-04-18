@@ -1,0 +1,161 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Study session
+{% endblock %}
+
+{% block main %}
+<div class="box">
+    <div class="content" >
+        <form id="form" action="/study" method="post" onsubmit="check_input()">
+            <h2 class="timer" id="timer"></h2>
+            <div id="input">
+                <h2>Start a language study session:</h2>
+                <fieldset>
+                    <div class="grid-35">
+                        <label>Language:</label>
+                    </div>
+                    <div class="grid-65">
+                        <input autocomplete="off" autofocus class="form-control mx-auto w-auto" type="text" name ="language" id="language" placeholder="Language"/>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <div class="grid-35">
+                        <label>Focus:</label>
+                    </div>
+                    <div class="grid-65">
+                        <select name="focus" id="focus">
+                            <option disabled selected>Choose</option>
+                            <option>Grammar</option>
+                            <option>Vocabulary</option>
+                            <option>Reading</option>
+                            <option>Speaking</option>
+                            <option>Writing</option>
+                        </select>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <div class="grid-35">
+                        <label>Time:</label>
+                    </div>
+                    <div class="grid-65">
+                        <input autocomplete="off" autofocus class="form-control mx-auto w-auto" type="text" name ="time" id="time" placeholder="min" />
+                    </div>
+                </fieldset>
+                <button class="btn btn-light" type="button" id="button">Begin</button>
+             </div>
+             <p id='textToAppear1' class='textToAppear'>Please do not leave any fields blank!</p>
+        </form>
+    </div>
+</div>
+<script>
+
+/*inspired by https://github.com/femkreations/countdown-timer.git*/
+var seconds;
+var interval;
+
+document.addEventListener('DOMContentLoaded', function() {
+	document.querySelector('#button').onclick=function(){
+        if(check_input() != false){
+            counter();
+        };
+    }
+    function tick(){
+        var timer=document.getElementById("timer");
+
+        var min=Math.floor(seconds/60);
+        var sec=seconds-(min*60);
+
+        if (sec < 10) {
+            sec="0"+sec;
+        }
+
+        var display=min+":"+sec;
+        timer.innerHTML=display;
+
+        if(seconds==0){
+            alert("Study session is over");
+            clearInterval(interval);
+            document.forms["form"].submit();
+        }
+        seconds--;
+    }
+
+    function counter(){
+        var time=document.getElementById("time").value;
+        var language=document.getElementById("language").value;
+
+        if (isNaN(time)){
+            alert("Type a valid number");
+            return false;
+        }
+        else if (check_language(language) == false){
+            alert("Enter a valid language!");
+            return false;
+        }
+        seconds=time*60;
+
+        interval=setInterval(tick, 1000);
+        document.getElementById("input").style.display="none";
+    }
+    function check_input(){
+        var language = document.querySelector('#language').value;
+        var focus = document.querySelector('#focus').value;
+        var time = document.querySelector('#time').value;
+
+        if((language == null || language == "") || (focus == null || focus == "" || focus == "Choose") || (time== null || time == ""))
+        {
+            document.querySelector('#textToAppear1').classList.toggle('textToAppear');
+            event.preventDefault();
+            return false;
+        }
+    };
+    function check_language(l){
+        languages = ["arabic",
+                    "bulgarian",
+                    "catalan",
+                    "chinese",
+                    "croatian",
+                    "czech",
+                    "danish",
+                    "dutch",
+                    "english",
+                    "finnish",
+                    "french",
+                    "german",
+                    "greek",
+                    "hebrew",
+                    "hindi",
+                    "hungarian",
+                    "indonesian",
+                    "italian",
+                    "japanese",
+                    "korean",
+                    "latvian",
+                    "lithuanian",
+                    "norwegian",
+                    "polish",
+                    "portuguese",
+                    "romanian",
+                    "russian",
+                    "serbian",
+                    "slovak",
+                    "slovenian",
+                    "spanish",
+                    "swedish",
+                    "tagalog",
+                    "thai",
+                    "turkish",
+                    "kkrainian",
+                    "vietnamese",]
+        if (languages.includes(l.toLowerCase())){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+});
+</script>
+
+{% endblock %}

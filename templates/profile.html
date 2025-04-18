@@ -1,0 +1,141 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    profile
+{% endblock %}
+
+{% block main %}
+{% if profiles is defined and profiles|length > 0 %}
+<div class="box">
+      <div class="content">
+          <h2>Edit Profile</h2>
+      <form action="/profile" method="post" onsubmit="check_input()">
+            {% for profile in profiles %}
+              <fieldset>
+                <div class="grid-35">
+                  <label for="name">First Name</label>
+                </div>
+                <div class="grid-65">
+                  <input autocomplete="off" autofocus class="form-control mx-auto w-auto" type="text" name ="name" id="name" tabindex="1" value="{{ profile.name}}" />
+                </div>
+                </fieldset>
+                <fieldset>
+                  <div class="grid-35">
+                    <label for="lname">Last Name</label>
+                  </div>
+                  <div class="grid-65">
+                    <input autocomplete="off" autofocus class="form-control mx-auto w-auto" type="text" id="lname" name ="lname" tabindex="2" value="{{ profile.lastname}}"/>
+                  </div>
+                </fieldset>
+                <fieldset >
+                  <!-- language -->
+                  <div class="grid-35">
+                      <label for="language">Main language</label>
+                  </div>
+                   <div class="grid-65" id="languageForm">
+                      <input autocomplete="off" id="language" tabindex="3" autofocus class="form-control mx-auto w-auto" name="language"  type="text" value="{{ profile.language}}">
+                      <div id="select">
+                          <select name="level" id="level">
+                              <option disabled selected>{{ profile.level}}</option>
+                              <option value=A1>A1</option>
+                              <option value=A2>A2</option>
+                              <option value=B1>B1</option>
+                              <option value=B2>B2</option>
+                              <option value=C1>C1</option>
+                              <option value=C2>C2</option>
+                          </select>
+                      </div>
+                  </div>
+                 </fieldset>
+              <!-- Email -->
+                <fieldset>
+                  <div class="grid-35">
+                    <label for="email">Email Address</label>
+                  </div>
+                  <div class="grid-65">
+                    <input autocomplete="off" autofocus class="form-control mx-auto w-auto" type="email" id="email" name ="email"tabindex="4" value="{{ profile.email}}"/>
+                  </div>
+                </fieldset>
+        <button class="btn btn-light" type="submit">Save Changes</button>
+        <p id='textToAppear1' class='textToAppear'>Please do not leave any fields blank!</p>
+        <p id='textToAppear2'>{{ check }}</p>
+  </form>
+  </div>
+</div>
+            {% endfor %}
+{% else %}
+<div class="box">
+  <div class="content">
+          <h2>Edit Profile</h2>
+          <form action="/profile" method="post" onsubmit="check_input()">
+                <fieldset>
+                <div class="grid-35">
+                  <label for="name">First Name</label>
+                </div>
+                <div class="grid-65">
+                    <input autocomplete="off" autofocus class="form-control mx-auto w-auto" type="text" name ="name" id="name" tabindex="1"/>
+                </div>
+                </fieldset>
+                <fieldset>
+                <div class="grid-35">
+                  <label for="lname">Last Name</label>
+                </div>
+                <div class="grid-65">
+                    <input autocomplete="off" autofocus class="form-control mx-auto w-auto" type="text" id="lname" name ="lname" tabindex="2"/>
+                </div>
+                </fieldset>
+                <fieldset>
+                <!-- language -->
+                <div class="grid-35">
+                  <label for="language">Main language</label>
+                    </div>
+                <div class="grid-65">
+                <input autocomplete="off" id="language" tabindex="3" autofocus class="form-control mx-auto w-auto" name="language"  type="text">
+                </div>
+                <div class="grid-65">
+                  <div id="select">
+                    <select name="level" id="level">
+                        <option disabled selected>Level</option>
+                        <option value=A1>A1</option>
+                        <option value=A2>A2</option>
+                        <option value=B1>B1</option>
+                        <option value=B2>B2</option>
+                        <option value=C1>C1</option>
+                        <option value=C2>C2</option>
+                    </select>
+                  </div>
+                </div>
+                </fieldset>
+                <!-- Email -->
+                <fieldset>
+                <div class="grid-35">
+                    <label for="email">Email Address</label>
+                </div>
+                <div class="grid-65">
+                    <input autocomplete="off" autofocus class="form-control mx-auto w-auto" type="email" id="email" name ="email"tabindex="4"/>
+                </div>
+                </fieldset>
+                <button class="btn btn-light" type="submit">Save Changes</button>
+                <p id='textToAppear1' class='textToAppear'>Please do not leave any fields blank!</p>
+                <p id='textToAppear2'>{{ check }}</p>
+            </form>
+         </div>
+      </div>
+</div>
+{% endif %}
+<script>
+  function check_input(){
+      var name = document.querySelector('#name').value;
+      var lastname = document.querySelector('#lname').value;
+      var email = document.querySelector('#email').value;
+      var language = document.querySelector('#language').value;
+      var level = document.querySelector('#level').value;
+
+      if((name == null || name == "") || (email == null || email == "") || (lastname == null || lastname == "") || (language == null || language == "") || (level == null || level == ""))
+      {
+          document.querySelector('#textToAppear1').classList.toggle('textToAppear');
+          event.preventDefault();
+      }
+  };
+</script>
+{% endblock %}

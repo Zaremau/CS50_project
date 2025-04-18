@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Log In
+{% endblock %}
+
+{% block main %}
+<video autoplay loop muted plays-inline class="background-video">
+    <source src="static/video.mp4" type="video/mp4">
+</video>
+    <form action="/login" method="post" onsubmit="check_input()">
+        <div class="mb-3">
+            <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="email" name="email" placeholder="E-mail" type="text">
+        </div>
+        <div class="mb-3">
+            <input class="form-control mx-auto w-auto" id="password" name="password" placeholder="Password" type="password">
+        </div>
+        <button id="button" class="btn btn-light" type="submit" >Log In</button>
+        <p id='textToAppear1' class='textToAppear'>Please do not leave any fields blank!</p>
+        <p id='textToAppear2'>{{ check }}</p>
+    </form>
+
+<script type="text/javascript">
+    function check_input(){
+        var password = document.querySelector('#password').value;
+        var email = document.querySelector('#email').value;
+
+        if((password == null || password == "") || (email == null || email == ""))
+        {
+            document.querySelector('#textToAppear1').classList.toggle('textToAppear');
+            event.preventDefault();
+        }
+    };
+</script>
+{% endblock %}

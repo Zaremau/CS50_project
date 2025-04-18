@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Register
+{% endblock %}
+
+{% block main %}
+<video autoplay loop muted plays-inline class="background-video">
+    <source src="static/video.mp4" type="video/mp4">
+</video>
+    <form action="/register" method="post" onsubmit="check_input()">
+        <div class="mb-3">
+            <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="username" name="username" placeholder="Username" type="text">
+        </div>
+        <div class="mb-3">
+            <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="email" name="email" placeholder="E-mail" type="text">
+        </div>
+        <div class="mb-3">
+            <input class="form-control mx-auto w-auto" id="password" name="password" placeholder="Password" type="password">
+        </div>
+        <div class="mb-3">
+            <input class="form-control mx-auto w-auto" id="confirmation" name="confirmation" placeholder="Confirm password" type="password">
+        </div>
+        <button class="btn btn-light" type="submit">Register</button>
+        <p id='textToAppear1' class='textToAppear'>Please do not leave any fields blank!</p>
+        <p id='textToAppear2'>{{ check }}</p>
+    </form>
+
+<script type="text/javascript">
+    function check_input(){
+        var password = document.querySelector('#password').value;
+        var email = document.querySelector('#email').value;
+        var username = document.querySelector('#username').value;
+        var confirmation = document.querySelector('#confirmation').value;
+
+        if((password == null || password == "") || (email == null || email == "") || (confirmation == null || confirmation == "") || (username == null || username == ""))
+        {
+            document.querySelector('#textToAppear1').classList.toggle('textToAppear');
+            event.preventDefault();
+        }
+    };
+</script>
+{% endblock %}

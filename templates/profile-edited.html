@@ -1,0 +1,77 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    profile
+{% endblock %}
+
+{% block main %}
+      <div class="wrapper">
+        <div class="box">
+          <div class="content">
+            <h2>Profile</h2>
+                <form action="/profile-edited" method="post">
+             {% if profiles is defined and profiles|length > 0 %}
+                {% for profile in profiles %}
+                <fieldset>
+                    <div class="grid-35">
+                    <label for="fname">First Name</label>
+                    </div>
+                    <div class="grid-65">
+                    <h2 class="form-control mx-auto w-auto" type="text" id="fname" tabindex="1">{{ profile.name }}</h2>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <div class="grid-35">
+                    <label for="lname">Last Name</label>
+                    </div>
+                    <div class="grid-65">
+                        <h2 class="form-control mx-auto w-auto" type="text" id="lname" tabindex="1">{{ profile.lastname }}</h2>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <!-- language -->
+                    <div class="grid-35">
+                        <label for="lname">Main language</label>
+                    </div>
+                    <div class="grid-65">
+                    <h2 id="language" tabindex="3" class="form-control mx-auto w-auto" name="language"  type="text"> {{ profile.language }}
+                    <select name="level">
+                        <option disabled selected>{{ profile.level }}</option>>
+                    </select>
+                   </h2>
+                    </div>
+                </fieldset>
+                <!-- Email -->
+                <fieldset>
+                    <div class="grid-35">
+                    <label for="email">Email Address</label>
+                    </div>
+                    <div class="grid-65">
+                    <h2 class="form-control mx-auto w-auto" type="email" id="email" tabindex="4">{{ profile.email }} </h2>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <div class="grid-35">
+                    <label for="email">Password</label>
+                    </div>
+                    <div class="grid-65">
+                    <h2 class="form-control mx-auto w-auto" type="email" id="email" tabindex="4">*************</h2>
+                    <a href="http://127.0.0.1:5000/security">Change password</a>
+                    </div>
+                </fieldset>
+                </fieldset>
+                {% endfor %}
+                <fieldset>
+                    <button class="btn btn-light" type="submit">Edit profile</button>
+                </fieldset>
+              {% else %}
+                <fieldset>
+                    <h2>Add information to ypur profile</h2>
+                    <button class="btn btn-light" type="submit">Edit profile</button>
+                </fieldset>
+              {% endif %}
+            </form>
+          </div>
+        </div>
+      </div>
+{% endblock %}

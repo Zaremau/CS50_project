@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Register
+{% endblock %}
+
+{% block main %}
+<form id="security" action="/security" method="post" onsubmit="check_input()">
+     <div class="box">
+        <div clas="content">
+        <fieldset class="justify-content-md-center">
+        <div class="mb-3">
+            <input class="form-control mx-auto w-auto" id="current_password" name="current_password" placeholder="Current Password" type="password">
+        </div>
+        <div class="mb-3">
+            <input class="form-control mx-auto w-auto" id="new_password" name="new_password" placeholder="New Password" type="password">
+        </div>
+        <div class="mb-3">
+            <input class="form-control mx-auto w-auto" id="confirmation" name="confirmation" placeholder="Confirm new password" type="password">
+        </div>
+        <div class="mb-3">
+            <button class="btn btn-light" type="submit">Change password</button>
+        </div>
+         <p id='textToAppear1' class='textToAppear'>Please do not leave any fields blank!</p>
+         <p id='textToAppear2'>{{ check }}</p>
+        </fieldset>
+
+        </div>
+    </div>
+</form>
+<script type="text/javascript">
+    function check_input(){
+        var c_password = document.querySelector('#current_password').value;
+        var n_password = document.querySelector('#new_password').value;
+        var cnfm_password = document.querySelector('#confirmation').value;
+
+        if((c_password == null || c_password == "") || (n_password == null || n_password == "") || (cnfm_password == null || cnfm_password == ""))
+        {
+            document.querySelector('#textToAppear1').classList.toggle('textToAppear');
+            event.preventDefault();
+        }
+    };
+</script>
+{% endblock %}

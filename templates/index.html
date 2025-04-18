@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Homepage
+{% endblock %}
+
+{% block main %}
+<script type="text/javascript">
+    /*create an async function to get a random quote*/
+    document.addEventListener('DOMContentLoaded', function() {
+    const quote = document.getElementById("quote");
+    const author = document.getElementById("author");
+
+    async function Quote(){
+        var result = await fetch("http://quotable.io/random");
+        result = await result.json();
+        quote.innerText = result.content;
+        author.innerText = result.author;
+    }
+    Quote();
+})
+</script>
+
+<video autoplay loop muted plays-inline class="background-video">
+    <source src="static/video.mp4" type="video/mp4">
+</video>
+
+<div >
+    <h2 id='message'>{{ message }}</h2>
+
+    <h2 id='quote'></h2>
+    <h2 id='author'></h2>
+</div>
+
+
+{% endblock %}

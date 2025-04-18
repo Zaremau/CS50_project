@@ -1,0 +1,188 @@
+
+/* found styles to adjust the background video to fit the window here:
+https://www.youtube.com/watch?v=znqUwx0b0HI&t=754s */
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+  color: #40826D;
+}
+
+nav{
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 30px 8%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between:
+}
+
+.logo{
+    width: 80px;
+}
+nav .navbar-brand{
+    color: #fff;
+    font-size: xx-large;
+    font-weight: 600;
+    transition: 0.5s;
+}
+nav .navbar-brand .transparent:hover{
+    -webkit-text-stroke: 2px #40826D;
+    color: transparent;
+}
+nav .navbar-brand .white{
+    color: #fff;
+}
+
+.background-video{
+    position: absolute;
+    right: 0;
+    bottom:0;
+    z-index: -1;
+}
+@media (min-aspect-ratio: 16/9){
+    .background-video{
+        width: 100%;
+        height: auto;
+    }
+}
+
+@media (max-aspect-ratio: 16/9){
+    .background-video{
+        width: auto;
+        height: 100%;
+    }
+}
+.box{
+    position: absolute;
+    top: 80px;
+    bottom: auto;
+    left: 0;
+    right: 0;
+    min-height: 80%;
+    height: auto;
+    width: 85%;
+    margin: 20px auto;
+    background-color: #EFDECD;
+    box-shadow: 0 5px 5px #ccc;
+  }
+  .content{
+    min-height: 100%;
+    height: 100%;
+    width: 95%;
+    margin: 5% 4%;
+  }
+
+.btn{
+    top: 25%;
+    left: 25%;
+    background-color: #f5f5f5;
+    padding: 10px 15px;
+    margin: 4px;
+    cursor: pointer;
+    border-radius: 120px;
+    border: 1px solid #40826D;
+    }
+.btn:hover{
+    opacity: 4;
+    color: #fff;
+    background-color: #40826D;
+}
+
+.grid-35{
+  position: absolute;
+  width: 35%;
+  float: left;
+  margin-left: 5%;
+}
+.grid-65{
+  position: relative;
+  width: 65%;
+  float: right;
+
+}
+
+h2 {
+  text-align: center;
+  color: #555;
+  font-family: Lato;
+  font-size: 40px;
+  font-weight: 200;
+  margin: 5px auto 15px auto;
+}
+label {
+    text-align: center;
+    color: #555;
+    font-family: Lato;
+    font-size: 20px;
+    font-weight: 200;
+    margin: 5px 5px 15px auto;
+  }
+select{
+  width: auto;
+  padding: 8px 10px;
+  background-color: #f5f5f5;
+  border: 1px solid #40826D;
+  border-radius: 120px;
+  outline: 0;
+}
+
+fieldset{
+  padding-inline: 1em 5em;
+  text-align: center;
+  margin-bottom: 5px;
+  padding: 5px;
+}
+#select{
+  height: 100%;
+  width: 100%;
+  text-align: center;
+}
+.timer{
+  font-size: 350px;
+}
+.charts{
+  display: inline-block;
+  padding-inline: 1em 5em;
+}
+#LineChart{
+  margin-top: 10px;
+  margin-left: 30%;
+}
+#PieChart{
+  margin-top: 10px;
+  margin-right: 50%;
+}
+#quote{
+  position: absolute;
+  bottom: 18px;
+  right: 13px;
+  padding: 1.5em;
+  font-size: 20px;
+}
+#author{
+  position: absolute;
+  bottom: 7px;
+  right: 16px;
+  padding: 1em;
+  font-size: 18px;
+}
+#message{
+  font-size: 40px;
+  font-weight: 300;
+  min-height: 100%;
+  height: 100%;
+  width: 45%;
+  margin: 2% 4%;
+  position: center;
+}
+.textToAppear{
+  display: none;
+  color: #FF0000;
+}
+.justify-content-md-center{
+  margin-top: 13%;
+}

@@ -1,0 +1,105 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Statistics
+{% endblock %}
+
+{% block head %}
+   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+{% endblock %}
+
+{% block main %}
+<form action="/statistics" method="post">
+ <div class="box">
+    <div>
+        <h2></h2>
+        <select name="language">
+            <option disabled selected>Language</option>
+            {% for row in choose_language %}
+            <option>{{ row.language }}</option>
+            {% endfor %}
+        </select>
+        <button  type="submit" class="btn bnt-light">Choose</button>
+    </div>
+        <div >
+            <div class="charts"><canvas  id="PieChart" width="400" height="400"></canvas></div>
+            <div class="charts"><canvas  id="LineChart" width="400" height="400"></canvas></div>
+        </div>
+    </div>
+</form>
+
+<script>
+
+    var pch = document.getElementById("PieChart").getContext("2d")
+    var pieChart = new Chart(pch,{
+        type: 'pie',
+        data: data = {
+            labels:  [{% for row in info %}
+                        '{{ row.focus }}',
+                        {% endfor %}],
+            datasets: [{
+                label: '{{ label }}',
+                data: [{% for row in info %}
+                        '{{ row.time }}',
+                        {% endfor %}],
+                fill: false,
+                hoverOffset: 4,
+                tension: 0.1,
+                }
+            ]
+        },
+        options: {
+                responsive: false,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: '{{ label }}',
+                        padding: {
+                            top: 10,
+                            bottom: 10
+                        }
+                    }
+                }
+        }
+    });
+    var lch = document.getElementById("LineChart").getContext("2d")
+    var LineChart = new Chart(lch,{
+        type: 'line',
+        data:
+            data = {
+                labels:  [{% for row in data_lnchrt %}
+                            '{{ row.date }}',
+                            {% endfor %}],
+                datasets: [{
+                    label:'{{ label }}',
+                    data: [{% for row in data_lnchrt %}
+                            '{{ row.time }}',
+                            {% endfor %}],
+
+                    fill: false,
+                    hoverOffset: 4,
+                    tension: 0.1,
+                    }
+                ]
+            },
+            options: {
+                responsive: false,
+                scales: {
+                    y: {
+                      title: {
+                        display: true,
+                        text: 'Amount of time in minutes'
+                      }
+                    },
+                    x: {
+                        title: {
+                          display: true,
+                          text: 'Dates'
+                        }
+                      }
+                  }
+            }
+    });
+
+</script>
+{% endblock %}
